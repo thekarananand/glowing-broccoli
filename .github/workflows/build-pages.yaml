@@ -22,7 +22,8 @@ jobs:
         run: |
           curl -X POST \
             -H "Content-Type: application/json" \
-            -d '{
-                  "Files Changed": "${{ env.ALL_CHANGED_FILES }}"
-                }' \
+            -d "{
+                  \"text\": \"The following files have been changed: ${{
+                    env.ALL_CHANGED_FILES }}\"
+                }" \
             "${{ secrets.G_CHAT_WEBHOOK }}"
