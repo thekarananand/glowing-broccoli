@@ -25,7 +25,7 @@ jobs:
             curl -X POST \
               -H "Content-Type: application/json" \
               -d '{
-                    "text": "Change: ${file}\\nTime: ${DATE}"
+                    "text": "Change: ${{ file }}\\nTime: ${{ DATE }}"
                   }' \
               "${{ secrets.G_CHAT_WEBHOOK }}"
           done
