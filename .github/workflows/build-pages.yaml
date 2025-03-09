@@ -20,10 +20,12 @@ jobs:
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -d "{
-                  \"change\": \"${{
-                    env.ALL_CHANGED_FILES }}\"
-                }" \
-            "${{ secrets.G_CHAT_WEBHOOK }}"
+          DATE=$(date +%Y-%m-%d\ %H-%M)
+          for file in ${ALL_CHANGED_FILES}; do
+            curl -X POST \
+              -H "Content-Type: application/json" \
+              -d '{
+                    "text": "Change: ${file}\\nTime: ${DATE}"
+                  }' \
+              "${{ secrets.G_CHAT_WEBHOOK }}"
+          done
